@@ -1,0 +1,86 @@
+Setup Log of: Autochartist MT4 plugin
+Version: 70
+
+Date: 31-MAY-2014 14:19:04
+Operating System: Win8  6.2  9200 - x86 Workstation
+Composer Version: 11.0.0.1
+
+WinTempDir: C:\users\mac\Temp
+SourceDir:  C:\users\mac\Temp\SETUP_15904
+
+Execute at: (1) --- Setup Start
+Execute at: (22) --- Before Dialogs
+Show Setup Dialog: Welcome
+Show Setup Dialog: License Agreement
+Execute at: (24) --- Before DisplayDelayMessage
+Show Custom Setup Dialog: DisplayDelayMessage
+Execute at: (25) --- After DisplayDelayMessage
+   *** RunInstallerCheckScrypt *** 
+    THEN Enable Setup Dialog (FALSE)  (TRUE)
+    THEN Run Executable and Wait (C:\users\mac\Temp\SETUP_15904\InstallationFolderDetector.exe, SW_HIDE)  (TRUE)
+    THEN Enable Setup Dialog (TRUE)  (TRUE)
+
+   *** ChangeDestinationFolder *** 
+    IF File Found  C:\users\mac\Temp\mt4_installation_dir.xml  (TRUE)
+      Result: TRUE
+
+    THEN Read XML Value (C:\users\mac\Temp\mt4_installation_dir.xml, MT4.dir, MT4InstallationFolder)  (TRUE)
+    THEN Select one of many (Please select the correct MT4 platform to install to:, Z:\Applications,Specify Manually, MT4InstallationDir)  (TRUE)
+    THEN Set Variable Value (<FoundMQL4>, YES)  (TRUE)
+
+   *** CheckDestinationFolderDefault *** 
+    IF Compare 1 Variable  <FoundMQL4> = YES  (TRUE)
+      Result: TRUE
+
+    THEN Set Variable Value (<FoundMQL4_D>, YES)  (TRUE)
+    THEN Enable Setup Dialog (FALSE)  (TRUE)
+    THEN Run Executable and Wait (C:\users\mac\Temp\SETUP_15904\InstallationFolderDetector.exe, "Specify Manually", SW_HIDE)  (TRUE)
+    THEN Enable Setup Dialog (TRUE)  (TRUE)
+
+   *** ChangeDestinationFolderDefault *** 
+    IF Compare 1 Variable  <FoundMQL4_D> = YES  (TRUE)
+    and
+    IF Compare 1 Variable  <FoundMQL4> = YES  (TRUE)
+    and
+    IF File Found  C:\users\mac\Temp\mt4_installation_dir2.xml  (FALSE)
+      Result: FALSE
+
+    ELSE Set Folder To (C:\Program Files\MetaTrader - ActivTrades\)  (FALSE)
+    ELSE Set Variable Value (600BuildDir, C:\Program Files\DestekFX MetaTrader 4)  (TRUE)
+
+   *** ChangeDestination600Build *** 
+    IF Directory Found  C:\Program Files\DestekFX MetaTrader 4\MQL4  (FALSE)
+      Result: FALSE
+
+    ELSE Set Folder To (Application Folder, C:\Program Files\DestekFX MetaTrader 4\experts)  (TRUE)
+
+Execute at: (13) --- Before Destination
+Show Setup Dialog: Choose Destination Location
+Execute at: (14) --- After Destination
+   *** Check *** 
+    IF NOT Directory Found  C:\Program Files\DestekFX MetaTrader 4\experts\Indicators  (TRUE)
+      Result: TRUE
+
+    THEN Show PopUp Message (Please select a valid installation directory where MT4 has been installed)  (TRUE)
+    THEN Set Dialog to (Destination)  (TRUE)
+
+   *** DeleteTempFiles *** 
+    THEN Delete File(s) (C:\users\mac\Temp\mt4_installation_dir2.xml)  (FALSE)
+    THEN Delete File(s) (C:\users\mac\Temp\mt4_installation_dir.xml)  (TRUE)
+
+Execute at: (13) --- Before Destination
+Show Setup Dialog: Choose Destination Location
+Execute at: (14) --- After Destination
+   *** Check *** 
+    IF NOT Directory Found  Z:\Users\mac\Downloads\Binary Trade Scripts\experts\Indicators  (TRUE)
+      Result: TRUE
+
+    THEN Show PopUp Message (Please select a valid installation directory where MT4 has been installed)  (TRUE)
+    THEN Set Dialog to (Destination)  (TRUE)
+
+   *** DeleteTempFiles *** 
+    THEN Delete File(s) (C:\users\mac\Temp\mt4_installation_dir2.xml)  (FALSE)
+    THEN Delete File(s) (C:\users\mac\Temp\mt4_installation_dir.xml)  (FALSE)
+
+Execute at: (13) --- Before Destination
+Show Setup Dialog: Choose Destination Location
